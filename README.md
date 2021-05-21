@@ -8,7 +8,3 @@ This repository contains some python scripts which can translate languages with 
 2. Translate the text into another language with [googletrans library](https://pypi.org/project/googletrans/)
 3. Convert the translated text into voice [gtts library](https://pypi.org/project/gTTS/)
 4. Play the voice as sound [playsound library](https://pypi.org/project/playsound/)
-
-###### System Architecture
-
-![System Architecture](/system-architeture.png)
