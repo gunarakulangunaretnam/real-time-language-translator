@@ -44,9 +44,40 @@ Googletrans is a free and unlimited python library that implemented Google Trans
 
 This is core library of this project, which does the translations among languages.
 
+## Configuration & Setup
+
+- Install playsound
+
+  ```
+  pip install playsound
+  ```
+
+- Install gTTS
+
+  ```
+  pip install gTTS
+  ```
+
+- Install SpeechRecognition
+
+  ```
+  pip install SpeechRecognition
+  ```
+
+
+- Install googletrans
+
+  ```
+  pip install googletrans==3.1.0a0
+  ```
+
+
 ## Execution & Running
 
-**Note:** To perform translation, navigate to the preferred folder, and execute the run.py script to start the program.
+**Note:** To run this program, navigate to the preferred folder, and execute the run.py script to start the program.
+
+![diagram](github-readme-contents/folder.jpg)
+
 
 ```
 python run.py
