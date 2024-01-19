@@ -50,7 +50,7 @@ A voice recognition-based tool for translating languages in real-time. This tool
    streamlit run main.py
   ```
 
-
+[2-demo-video.webm](https://github.com/gunarakulangunaretnam/language-translator-bot/assets/45822509/86a26bf0-0500-42e1-a626-497084cc7772)
 
 ## Social Links
 
