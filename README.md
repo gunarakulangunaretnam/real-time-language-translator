@@ -1,4 +1,4 @@
-# Real Time Voice Recognition based Language Translation Bot
+# Language Translation Bot
 
 ## Introduction
 
