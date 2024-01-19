@@ -55,8 +55,8 @@ def main_process(output_placeholder, from_language, to_language):
 st.title("Language Translator")
 
 # Dropdowns for selecting languages
-from_language_name = st.selectbox("From", list(LANGUAGES.values()))
-to_language_name = st.selectbox("To", list(LANGUAGES.values()))
+from_language_name = st.selectbox("Select Source Language:", list(LANGUAGES.values()))
+to_language_name = st.selectbox("Select Target Language:", list(LANGUAGES.values()))
 
 # Convert language names to language codes
 from_language = get_language_code(from_language_name)
