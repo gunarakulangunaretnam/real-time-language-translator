@@ -1,5 +1,15 @@
+import os
+import time
+import pygame
+from gtts import gTTS
 import streamlit as st
+import speech_recognition as sr
 from googletrans import LANGUAGES, Translator
+
+isTranslateOn = False
+
+translator = Translator() # Initialize the translator module.
+pygame.mixer.init()  # Initialize the mixer module.
 
 # Create a mapping between language names and language codes
 language_mapping = {name: code for code, name in LANGUAGES.items()}
@@ -7,10 +17,39 @@ language_mapping = {name: code for code, name in LANGUAGES.items()}
 def get_language_code(language_name):
     return language_mapping.get(language_name, language_name)
 
-def translate_text(text, source_language, target_language):
-    translator = Translator()
-    translated_text = translator.translate(text, src=source_language, dest=target_language).text
-    return translated_text
+def translator_function(spoken_text, from_language, to_language):
+    return translator.translate(spoken_text, src='{}'.format(from_language), dest='{}'.format(to_language))
+
+def text_to_voice(text_data, to_language):
+    myobj = gTTS(text=text_data, lang='{}'.format(to_language), slow=False)
+    myobj.save("cache_file.mp3")
+    audio = pygame.mixer.Sound("cache_file.mp3")  # Load a sound.
+    audio.play()
+    os.remove("cache_file.mp3")
+
+def main_process(output_placeholder, from_language, to_language):
+    
+    global isTranslateOn
+    
+    while isTranslateOn:
+
+        rec = sr.Recognizer()
+        with sr.Microphone() as source:
+            output_placeholder.text("Listening...")
+            rec.pause_threshold = 1
+            audio = rec.listen(source, phrase_time_limit=10)
+        
+        try:
+            output_placeholder.text("Processing...")
+            spoken_text = rec.recognize_google(audio, language='{}'.format(from_language))
+            
+            output_placeholder.text("Translating...")
+            translated_text = translator_function(spoken_text, from_language, to_language)
+
+            text_to_voice(translated_text.text, to_language)
+    
+        except Exception as e:
+            print(e)
 
 # UI layout
 st.title("Language Translator")
@@ -24,19 +63,16 @@ from_language = get_language_code(from_language_name)
 to_language = get_language_code(to_language_name)
 
 # Button to trigger translation
-if st.button("Start"):
-    st.text("Translation in progress...")
+start_button = st.button("Start")
+stop_button = st.button("Stop")
 
-    print(from_language)
-    print(to_language)
-    
-    # Your translation logic here
-    text_to_translate = "Hello, world!"  # Replace this with the actual text you want to translate
-    translated_result = translate_text(text_to_translate, from_language, to_language)
-    
-    # Display the translated text
-    st.text(f"Translated text from {from_language_name} to {to_language_name} ({from_language} to {to_language}):")
-    st.text(translated_result)
+# Check if "Start" button is clicked
+if start_button:
+    if not isTranslateOn:
+        isTranslateOn = True
+        output_placeholder = st.empty()
+        main_process(output_placeholder, from_language, to_language)
 
-# Display status
-st.text("Status: Ready")
+# Check if "Stop" button is clicked
+if stop_button:
+    isTranslateOn = False
