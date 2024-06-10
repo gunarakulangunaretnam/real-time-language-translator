@@ -1,4 +1,4 @@
-# REAL-TIME LANGUAGE TRANSLATOR BOT
+# Real-Time Language Translator Bot
 
 ## 01 Introduction
 
@@ -52,7 +52,7 @@ A voice recognition-based tool for translating languages in real-time. This tool
 
 [2-demo-video.webm](https://github.com/gunarakulangunaretnam/language-translator-bot/assets/45822509/86a26bf0-0500-42e1-a626-497084cc7772)
 
-# CONTACT
+# Contact
 
 ### Website: 
 
